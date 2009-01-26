@@ -9,10 +9,13 @@ License:	MIT License
 Group:		Development/Languages/Java
 Source0:	https://hudson.dev.java.net/files/documents/2402/124475/%{name}.war
 # Source0-md5:	223788eb7fd27ba970daf8e06053f356
+Source1:	%{name}-web.xml
+Source2:	%{name}-context.xml
 URL:		https://hudson.dev.java.net/
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
+Requires:	apache-tomcat
 Requires:	jpackage-utils
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -36,16 +39,25 @@ Among those things, current Hudson focuses on the following two jobs:
   notice when something is wrong.
 
 %prep
-%setup -qcT
+%setup -qc
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_javadir}
-cp -a %{SOURCE0} $RPM_BUILD_ROOT%{_javadir}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/tomcat/webapps/hudson,%{_sharedstatedir}/{hudson,tomcat/conf/Catalina/localhost}}
+install %SOURCE1 $RPM_BUILD_ROOT%{_sysconfdir}/hudson/web.xml
+install %SOURCE2 $RPM_BUILD_ROOT%{_sharedstatedir}/tomcat/conf/Catalina/localhost/hudson.xml
+cp -a * $RPM_BUILD_ROOT%{_datadir}/tomcat/webapps/hudson
+ln -sf %{_sysconfdir}/hudson/web.xml $RPM_BUILD_ROOT%{_datadir}/tomcat/webapps/hudson/WEB-INF/web.xml
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_javadir}/*.war
+%dir %{_sysconfdir}/hudson
+%config(noreplace) %{_sysconfdir}/hudson/web.xml
+# do not make this file writeable by tomcat. We do not want to allow user to
+# undeploy this app via tomcat manager.
+%config(noreplace) %{_sharedstatedir}/tomcat/conf/Catalina/localhost/hudson.xml
+%{_datadir}/tomcat/webapps/hudson
+%attr(755,http,http) %dir %{_sharedstatedir}/hudson
