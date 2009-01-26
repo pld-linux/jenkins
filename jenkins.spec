@@ -60,4 +60,4 @@ rm -rf $RPM_BUILD_ROOT
 # undeploy this app via tomcat manager.
 %config(noreplace) %{_sharedstatedir}/tomcat/conf/Catalina/localhost/hudson.xml
 %{_datadir}/tomcat/webapps/hudson
-%attr(755,http,http) %dir %{_sharedstatedir}/hudson
+%attr(755,tomcat,tomcat) %dir %{_sharedstatedir}/hudson
