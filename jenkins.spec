@@ -15,7 +15,8 @@ URL:		https://hudson.dev.java.net/
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
-Requires:	apache-tomcat
+# Require version that uses tomcat uid/gid
+Requires:	apache-tomcat >= 5.5.27-0.2
 Requires:	jpackage-utils
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
