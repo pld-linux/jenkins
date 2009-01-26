@@ -46,7 +46,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/tomcat/webapps/hudson,%{_sharedstatedir}/{hudson,tomcat/conf/Catalina/localhost}}
 install %SOURCE1 $RPM_BUILD_ROOT%{_sysconfdir}/hudson/web.xml
 install %SOURCE2 $RPM_BUILD_ROOT%{_sharedstatedir}/tomcat/conf/Catalina/localhost/hudson.xml
-cp -a * $RPM_BUILD_ROOT%{_datadir}/tomcat/webapps/hudson
+cp -a . $RPM_BUILD_ROOT%{_datadir}/tomcat/webapps/hudson
 ln -sf %{_sysconfdir}/hudson/web.xml $RPM_BUILD_ROOT%{_datadir}/tomcat/webapps/hudson/WEB-INF/web.xml
 
 %clean
