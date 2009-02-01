@@ -1,5 +1,5 @@
 # TODO
-# - repackage .war with system jars?
+# - build it from sources
 %include	/usr/lib/rpm/macros.java
 Summary:	Hudson Continuous Build Server
 Name:		hudson
@@ -44,11 +44,11 @@ Among those things, current Hudson focuses on the following two jobs:
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/tomcat/webapps/hudson,%{_sharedstatedir}/{hudson,tomcat/conf/Catalina/localhost}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/hudson,%{_sharedstatedir}/{hudson,tomcat/conf/Catalina/localhost}}
 install %SOURCE1 $RPM_BUILD_ROOT%{_sysconfdir}/hudson/web.xml
 install %SOURCE2 $RPM_BUILD_ROOT%{_sharedstatedir}/tomcat/conf/Catalina/localhost/hudson.xml
-cp -a . $RPM_BUILD_ROOT%{_datadir}/tomcat/webapps/hudson
-ln -sf %{_sysconfdir}/hudson/web.xml $RPM_BUILD_ROOT%{_datadir}/tomcat/webapps/hudson/WEB-INF/web.xml
+cp -a . $RPM_BUILD_ROOT%{_datadir}/hudson
+ln -sf %{_sysconfdir}/hudson/web.xml $RPM_BUILD_ROOT%{_datadir}/hudson/WEB-INF/web.xml
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -60,5 +60,5 @@ rm -rf $RPM_BUILD_ROOT
 # do not make this file writeable by tomcat. We do not want to allow user to
 # undeploy this app via tomcat manager.
 %config(noreplace) %{_sharedstatedir}/tomcat/conf/Catalina/localhost/hudson.xml
-%{_datadir}/tomcat/webapps/hudson
+%{_datadir}/hudson
 %attr(755,tomcat,tomcat) %dir %{_sharedstatedir}/hudson
