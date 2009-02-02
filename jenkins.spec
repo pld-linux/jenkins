@@ -9,7 +9,7 @@ Release:	0.1
 License:	MIT License
 Group:		Development/Languages/Java
 Source0:	https://hudson.dev.java.net/files/documents/2402/125618/%{name}.war
-# Source0-md5:	bdc8fd32895498757718d3ac840cf652
+# Source0-md5:	d06c166cc478104bdf6d8cdf46ca5baa
 Source1:	%{name}-web.xml
 Source2:	%{name}-context.xml
 URL:		https://hudson.dev.java.net/
