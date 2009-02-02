@@ -1,13 +1,14 @@
 # TODO
 # - build it from sources
+#   https://hudson.dev.java.net/files/documents/2402/125619/hudson-1.280-src.zip
 %include	/usr/lib/rpm/macros.java
 Summary:	Hudson Continuous Build Server
 Name:		hudson
-Version:	1.278
+Version:	1.280
 Release:	0.1
 License:	MIT License
 Group:		Development/Languages/Java
-Source0:	https://hudson.dev.java.net/files/documents/2402/124475/%{name}.war
+Source0:	https://hudson.dev.java.net/files/documents/2402/125618/%{name}.war
 # Source0-md5:	223788eb7fd27ba970daf8e06053f356
 Source1:	%{name}-web.xml
 Source2:	%{name}-context.xml
