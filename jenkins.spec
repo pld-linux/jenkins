@@ -4,12 +4,12 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Hudson Continuous Build Server
 Name:		hudson
-Version:	1.280
+Version:	1.286
 Release:	0.1
 License:	MIT License
 Group:		Development/Languages/Java
-Source0:	https://hudson.dev.java.net/files/documents/2402/125618/%{name}.war
-# Source0-md5:	d06c166cc478104bdf6d8cdf46ca5baa
+Source0:	https://hudson.dev.java.net/files/documents/2402/127859/%{name}.war
+# Source0-md5:	a7bf1edfa712c125ad904a6f7d5ac483
 Source1:	%{name}-web.xml
 Source2:	%{name}-context.xml
 URL:		https://hudson.dev.java.net/
