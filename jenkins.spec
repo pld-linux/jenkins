@@ -17,7 +17,7 @@ URL:		https://hudson.dev.java.net/
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.300
-Requires:	java-servlet-container
+Requires:	group(servlet)
 Requires:	jpackage-utils
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -62,4 +62,4 @@ rm -rf $RPM_BUILD_ROOT
 # undeploy this app via tomcat manager.
 %config(noreplace) %{_sharedstatedir}/tomcat/conf/Catalina/localhost/hudson.xml
 %{_datadir}/hudson
-%attr(755,tomcat,tomcat) %dir %{_sharedstatedir}/hudson
+%attr(2775,root,servlet) %dir %{_sharedstatedir}/hudson
