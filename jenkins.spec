@@ -5,13 +5,13 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Hudson Continuous Build Server
 Name:		hudson
-Version:	1.291
-Release:	0.1
+Version:	1.300
+Release:	1
 License:	MIT License
-Group:		Development/Languages/Java
+Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: https://hudson.dev.java.net/servlets/ProjectRSS?type=news
-Source0:	https://hudson.dev.java.net/files/documents/2402/129512/%{name}.war
-# Source0-md5:	353b36edbbae9fd4c1c51376b4788a66
+Source0:	https://hudson.dev.java.net/files/documents/2402/132585/hudson.war
+# Source0-md5:	7fbd89280f7904c2445b6dc92ea79364
 Source1:	%{name}-web.xml
 Source2:	%{name}-context.xml
 URL:		https://hudson.dev.java.net/
@@ -43,6 +43,9 @@ Among those things, current Hudson focuses on the following two jobs:
 
 %prep
 %setup -qc
+
+rm *.class
+rm winstone.jar
 
 %install
 rm -rf $RPM_BUILD_ROOT
