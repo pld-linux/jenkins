@@ -6,7 +6,7 @@
 Summary:	Hudson Continuous Build Server
 Name:		hudson
 Version:	1.352
-Release:	1
+Release:	2
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: https://hudson.dev.java.net/servlets/ProjectRSS?type=news
@@ -50,7 +50,7 @@ rm winstone.jar
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/hudson,%{_tomcatconfdir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/hudson,%{_sharedstatedir}/hudson,%{_tomcatconfdir}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/web.xml
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
 ln -sf %{_sysconfdir}/%{name}/tomcat-context.xml $RPM_BUILD_ROOT%{_tomcatconfdir}/%{name}.xml
