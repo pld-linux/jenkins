@@ -50,8 +50,8 @@ rm winstone.jar
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/hudson,%{_sharedstatedir}/{hudson,tomcat/conf/Catalina/localhost}}
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/hudson/web.xml
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/hudson,%{_tomcatconfdir}}
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/web.xml
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
 ln -sf %{_sysconfdir}/%{name}/tomcat-context.xml $RPM_BUILD_ROOT%{_tomcatconfdir}/%{name}.xml
 cp -a . $RPM_BUILD_ROOT%{_datadir}/hudson
