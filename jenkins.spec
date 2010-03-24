@@ -17,8 +17,8 @@ Source2:	%{name}-context.xml
 URL:		https://hudson.dev.java.net/
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
-BuildRequires:	rpmbuild(macros) >= 1.300
-Requires:	group(servlet)
+BuildRequires:  rpmbuild(macros) >= 1.546
+Requires:	tomcat
 Requires:	jpackage-utils
 Requires:	jre-X11
 BuildArch:	noarch
@@ -52,9 +52,13 @@ rm winstone.jar
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/hudson,%{_sharedstatedir}/{hudson,tomcat/conf/Catalina/localhost}}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/hudson/web.xml
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sharedstatedir}/tomcat/conf/Catalina/localhost/hudson.xml
+install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
+ln -sf %{_sysconfdir}/%{name}/tomcat-context.xml $RPM_BUILD_ROOT%{_tomcatconfdir}/%{name}.xml
 cp -a . $RPM_BUILD_ROOT%{_datadir}/hudson
 ln -sf %{_sysconfdir}/hudson/web.xml $RPM_BUILD_ROOT%{_datadir}/hudson/WEB-INF/web.xml
+
+%postun
+%tomcat_clear_cache %{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -62,9 +66,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %dir %{_sysconfdir}/hudson
-%config(noreplace) %{_sysconfdir}/hudson/web.xml
-# do not make this file writeable by tomcat. We do not want to allow user to
-# undeploy this app via tomcat manager.
-%config(noreplace) %{_sharedstatedir}/tomcat/conf/Catalina/localhost/hudson.xml
-%{_datadir}/hudson
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/hudson/web.xml
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}
+%{_tomcatconfdir}/%{name}.xml
+%{_datadir}/%{name}
 %attr(2775,root,servlet) %dir %{_sharedstatedir}/hudson
