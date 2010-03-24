@@ -65,8 +65,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%dir %{_sysconfdir}/hudson
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/hudson/web.xml
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}
 %{_tomcatconfdir}/%{name}.xml
 %{_datadir}/%{name}
