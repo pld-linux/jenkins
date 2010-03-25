@@ -17,10 +17,10 @@ Source2:	%{name}-context.xml
 URL:		https://hudson.dev.java.net/
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
-BuildRequires:  rpmbuild(macros) >= 1.546
-Requires:	tomcat
+BuildRequires:	rpmbuild(macros) >= 1.546
 Requires:	jpackage-utils
 Requires:	jre-X11
+Requires:	tomcat
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -44,18 +44,17 @@ Among those things, current Hudson focuses on the following two jobs:
 
 %prep
 %setup -qc
-
 rm *.class
 rm winstone.jar
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/hudson,%{_datadir}/hudson,%{_sharedstatedir}/hudson,%{_tomcatconfdir}}
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/web.xml
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/%{name},%{_datadir}/%{name},%{_sharedstatedir}/%{name},%{_tomcatconfdir}}
+cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/web.xml
+cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
 ln -sf %{_sysconfdir}/%{name}/tomcat-context.xml $RPM_BUILD_ROOT%{_tomcatconfdir}/%{name}.xml
-cp -a . $RPM_BUILD_ROOT%{_datadir}/hudson
-ln -sf %{_sysconfdir}/hudson/web.xml $RPM_BUILD_ROOT%{_datadir}/hudson/WEB-INF/web.xml
+cp -a . $RPM_BUILD_ROOT%{_datadir}/%{name}
+ln -sf %{_sysconfdir}/%{name}/web.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/WEB-INF/web.xml
 
 %postun
 %tomcat_clear_cache %{name}
@@ -65,7 +64,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}
+%dir %{_sysconfdir}/%{name}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/*.xml
 %{_tomcatconfdir}/%{name}.xml
 %{_datadir}/%{name}
-%attr(2775,root,servlet) %dir %{_sharedstatedir}/hudson
+%attr(2775,root,servlet) %dir %{_sharedstatedir}/%{name}
