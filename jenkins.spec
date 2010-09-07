@@ -12,8 +12,8 @@ Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: https://hudson.dev.java.net/servlets/ProjectRSS?type=news
 Source0:	http://hudson-ci.org/download/war/%{version}/%{name}.war#/%{name}-%{version}.war
 # Source0-md5:	bad0b1d81919618677f84e462373f2dc
-Source1:	%{name}-web.xml
-Source2:	%{name}-context.xml
+Source1:	%{name}-context.xml
+Patch0:		%{name}-webxml.patch
 URL:		https://hudson.dev.java.net/
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
@@ -47,11 +47,13 @@ Among those things, current Hudson focuses on the following two jobs:
 rm *.class
 rm winstone.jar
 
+%patch0 -p1
+
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/%{name},%{_datadir}/%{name},%{_sharedstatedir}/%{name},%{_tomcatconfdir}}
-cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/web.xml
-cp -a %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
+mv WEB-INF/web.xml $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/web.xml
+cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
 ln -sf %{_sysconfdir}/%{name}/tomcat-context.xml $RPM_BUILD_ROOT%{_tomcatconfdir}/%{name}.xml
 cp -a . $RPM_BUILD_ROOT%{_datadir}/%{name}
 ln -sf %{_sysconfdir}/%{name}/web.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/WEB-INF/web.xml
