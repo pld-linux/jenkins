@@ -1,0 +1,11 @@
+--- hudson-1.374/WEB-INF/web.xml~	2010-08-27 20:33:02.000000000 +0200
++++ hudson-1.374/WEB-INF/web.xml	2010-09-07 16:40:06.000000000 +0200
+@@ -142,7 +142,7 @@
+   <env-entry>
+     <env-entry-name>HUDSON_HOME</env-entry-name>
+     <env-entry-type>java.lang.String</env-entry-type>
+-    <env-entry-value></env-entry-value>
++	<env-entry-value>/var/lib/hudson</env-entry-value>
+   </env-entry>
+ 
+   <!-- configure additional extension-content-type mappings -->
