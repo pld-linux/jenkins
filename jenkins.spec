@@ -6,7 +6,7 @@
 Summary:	Hudson Continuous Build Server
 Name:		hudson
 Version:	1.374
-Release:	1
+Release:	2
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: https://hudson.dev.java.net/servlets/ProjectRSS?type=news
