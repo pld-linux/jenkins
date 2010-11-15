@@ -5,13 +5,13 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Hudson Continuous Build Server
 Name:		hudson
-Version:	1.374
-Release:	2
+Version:	1.384
+Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: https://hudson.dev.java.net/servlets/ProjectRSS?type=news
 Source0:	http://hudson-ci.org/download/war/%{version}/%{name}.war#/%{name}-%{version}.war
-# Source0-md5:	bad0b1d81919618677f84e462373f2dc
+# Source0-md5:	65d1108eac802c284fdf4633bee3ef92
 Source1:	%{name}-context.xml
 Patch0:		%{name}-webxml.patch
 URL:		https://hudson.dev.java.net/
