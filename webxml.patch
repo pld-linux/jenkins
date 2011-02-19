@@ -5,7 +5,7 @@
      <env-entry-name>HUDSON_HOME</env-entry-name>
      <env-entry-type>java.lang.String</env-entry-type>
 -    <env-entry-value></env-entry-value>
-+	<env-entry-value>/var/lib/hudson</env-entry-value>
++	<env-entry-value>/var/lib/jenkins</env-entry-value>
    </env-entry>
  
    <!-- configure additional extension-content-type mappings -->

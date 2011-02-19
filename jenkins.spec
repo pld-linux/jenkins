@@ -1,24 +1,24 @@
 # TODO
-# - consider renaming to jenkins http://en.wikipedia.org/wiki/Jenkins_(software)
 # - build it from sources
 #   https://hudson.dev.java.net/files/documents/2402/125619/hudson-1.280-src.zip
 # - use system jars
 %include	/usr/lib/rpm/macros.java
 Summary:	Hudson Continuous Build Server
-Name:		hudson
-Version:	1.384
+Name:		jenkins
+Version:	1.397
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
-# Check for new releases and URLs here: https://hudson.dev.java.net/servlets/ProjectRSS?type=news
-Source0:	http://hudson-ci.org/download/war/%{version}/%{name}.war#/%{name}-%{version}.war
-# Source0-md5:	65d1108eac802c284fdf4633bee3ef92
-Source1:	%{name}-context.xml
-Patch0:		%{name}-webxml.patch
-URL:		https://hudson.dev.java.net/
+# Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/
+Source0:	http://mirrors.jenkins-ci.org/war/%{version}/%{name}.war#/%{name}-%{version}.war
+# Source0-md5:	72fb60153948f92c34c33d0166edd35c
+Source1:	context.xml
+Patch0:		webxml.patch
+URL:		http://www.jenkins-ci.org/
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.546
+Obsoletes:	hudson < 1.396
 Requires:	jpackage-utils
 Requires:	jre-X11
 Requires:	tomcat
@@ -26,12 +26,12 @@ BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Hudson monitors executions of repeated jobs, such as building a
+Jenkins monitors executions of repeated jobs, such as building a
 software project or jobs run by cron.
 
-Among those things, current Hudson focuses on the following two jobs:
+Among those things, current Jenkins focuses on the following two jobs:
 - Building/testing software projects continuously, just like
-  CruiseControl or DamageControl. In a nutshell, Hudson provides an
+  CruiseControl or DamageControl. In a nutshell, Jenkins provides an
   easy-to-use so-called continuous integration system, making it easier
   for developers to integrate changes to the project, and making it
   easier for users to obtain a fresh build. The automated, continoues
@@ -40,15 +40,16 @@ Among those things, current Hudson focuses on the following two jobs:
   procmail jobs, even those that are run on a remote machine. For
   example, with cron, all you receive is regular e-mails that capture
   the output, and it is up to you to look at them diligently and notice
-  when it broke. Hudson keeps those outputs and makes it easy for you to
+  when it broke. Jenkins keeps those outputs and makes it easy for you to
   notice when something is wrong.
 
 %prep
 %setup -qc
 rm *.class
 rm winstone.jar
-
 %patch0 -p1
+
+find '(' -name '*~' -o -name '*.orig' ')' -print0 | xargs -0 -r -l512 rm -f
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -58,6 +59,22 @@ cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
 ln -sf %{_sysconfdir}/%{name}/tomcat-context.xml $RPM_BUILD_ROOT%{_tomcatconfdir}/%{name}.xml
 cp -a . $RPM_BUILD_ROOT%{_datadir}/%{name}
 ln -sf %{_sysconfdir}/%{name}/web.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/WEB-INF/web.xml
+
+%post
+# If we have an old hudson install, rename it to jenkins
+if test -d /var/lib/hudson; then
+	echo >&2 "Moving /var/lib/hudson -> /var/lib/jenkins"
+	# leave a marker to indicate this came from Hudson.
+	# could be useful down the road
+	# This also ensures that the .??* wildcard matches something
+	touch /var/lib/hudson/.moving-hudson
+	mv -f /var/lib/hudson/* /var/lib/hudson/.??* /var/lib/jenkins
+	rmdir /var/lib/hudson
+fi
+if test -d /var/run/hudson; then
+	mv -f /var/run/hudson/* /var/run/jenkins
+	rmdir /var/run/hudson
+fi
 
 %postun
 %tomcat_clear_cache %{name}
