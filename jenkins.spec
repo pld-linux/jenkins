@@ -1,4 +1,5 @@
 # TODO
+# - consider renaming to jenkins http://en.wikipedia.org/wiki/Jenkins_(software)
 # - build it from sources
 #   https://hudson.dev.java.net/files/documents/2402/125619/hudson-1.280-src.zip
 # - use system jars
