@@ -5,13 +5,13 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Hudson Continuous Build Server
 Name:		jenkins
-Version:	1.434
+Version:	1.457
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
-# Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/
+# Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war/%{version}/%{name}.war#/%{name}-%{version}.war
-# Source0-md5:	ab08df72959dd8c302ea4969c206f518
+# Source0-md5:	a58432152f4799550a98470960607f42
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -55,7 +55,7 @@ find '(' -name '*~' -o -name '*.orig' ')' -print0 | xargs -0 -r -l512 rm -f
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/%{name},%{_datadir}/%{name},%{_sharedstatedir}/%{name},%{_tomcatconfdir}}
 mv WEB-INF/web.xml $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/web.xml
-cp -a %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
 ln -sf %{_sysconfdir}/%{name}/tomcat-context.xml $RPM_BUILD_ROOT%{_tomcatconfdir}/%{name}.xml
 cp -a . $RPM_BUILD_ROOT%{_datadir}/%{name}
 ln -sf %{_sysconfdir}/%{name}/web.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/WEB-INF/web.xml
