@@ -5,13 +5,13 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Hudson Continuous Build Server
 Name:		jenkins
-Version:	1.457
+Version:	1.475
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war/%{version}/%{name}.war#/%{name}-%{version}.war
-# Source0-md5:	a58432152f4799550a98470960607f42
+# Source0-md5:	1473fb2eba27d132bf00425d4b9f5032
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -45,8 +45,8 @@ Among those things, current Jenkins focuses on the following two jobs:
 
 %prep
 %setup -qc
-rm *.class
-rm winstone.jar
+%{__rm} *.class
+%{__rm} winstone.jar
 %patch0 -p1
 
 find '(' -name '*~' -o -name '*.orig' ')' -print0 | xargs -0 -r -l512 rm -f
