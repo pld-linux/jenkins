@@ -3,7 +3,7 @@
 #   https://hudson.dev.java.net/files/documents/2402/125619/hudson-1.280-src.zip
 # - use system jars
 %include	/usr/lib/rpm/macros.java
-Summary:	Hudson Continuous Build Server
+Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 Version:	1.475
 Release:	1
@@ -18,10 +18,10 @@ URL:		http://www.jenkins-ci.org/
 BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.546
-Obsoletes:	hudson < 1.396
 Requires:	jpackage-utils
 Requires:	jre-X11
 Requires:	tomcat
+Obsoletes:	hudson < 1.396
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -40,8 +40,8 @@ Among those things, current Jenkins focuses on the following two jobs:
   procmail jobs, even those that are run on a remote machine. For
   example, with cron, all you receive is regular e-mails that capture
   the output, and it is up to you to look at them diligently and notice
-  when it broke. Jenkins keeps those outputs and makes it easy for you to
-  notice when something is wrong.
+  when it broke. Jenkins keeps those outputs and makes it easy for you
+  to notice when something is wrong.
 
 %prep
 %setup -qc
