@@ -22,6 +22,7 @@ BuildRequires:	rpmbuild(macros) >= 1.546
 Requires:	jpackage-utils
 Requires:	jre-X11
 Requires:	tomcat
+Suggests:	%{name}-plugin-maven
 Obsoletes:	hudson < 1.396
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -48,6 +49,7 @@ Among those things, current Jenkins focuses on the following two jobs:
 Summary:	Jenkins Maven 2 Project Plugin
 Group:		Networking/Daemons/Java/Servlets
 URL:		https://wiki.jenkins-ci.org/display/JENKINS/Maven+2+Project+Plugin
+Requires:	%{name} = %{version}-%{release}
 
 %description plugin-maven
 Maven Integration plugin.
