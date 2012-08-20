@@ -2,6 +2,7 @@
 # - build it from sources
 #   https://hudson.dev.java.net/files/documents/2402/125619/hudson-1.280-src.zip
 # - use system jars
+# - subpackages (see ubuntu packages for splitting contents)
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
@@ -42,6 +43,14 @@ Among those things, current Jenkins focuses on the following two jobs:
   the output, and it is up to you to look at them diligently and notice
   when it broke. Jenkins keeps those outputs and makes it easy for you
   to notice when something is wrong.
+
+%package plugin-maven
+Summary:	Jenkins Maven 2 Project Plugin
+Group:		Networking/Daemons/Java/Servlets
+URL:		https://wiki.jenkins-ci.org/display/JENKINS/Maven+2+Project+Plugin
+
+%description plugin-maven
+Maven Integration plugin.
 
 %prep
 %setup -qc
@@ -87,5 +96,41 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/%{name}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/*.xml
 %{_tomcatconfdir}/%{name}.xml
-%{_datadir}/%{name}
 %attr(2775,root,servlet) %dir %{_sharedstatedir}/%{name}
+%dir %{_datadir}/%{name}
+%{_datadir}/%{name}/META-INF
+
+%dir %{_datadir}/%{name}/WEB-INF
+%{_datadir}/%{name}/WEB-INF/classes
+%{_datadir}/%{name}/WEB-INF/hudson
+%{_datadir}/%{name}/WEB-INF/lib
+%{_datadir}/%{name}/WEB-INF/security
+%{_datadir}/%{name}/WEB-INF/update-center-rootCAs
+%{_datadir}/%{name}/WEB-INF/*.xmi
+%{_datadir}/%{name}/WEB-INF/*.xml
+%{_datadir}/%{name}/WEB-INF/jenkins-cli.jar
+%{_datadir}/%{name}/WEB-INF/remoting.jar
+%{_datadir}/%{name}/WEB-INF/slave.jar
+
+%dir %{_datadir}/%{name}/WEB-INF/plugins
+%{_datadir}/%{name}/WEB-INF/plugins/ant.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/cvs.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/external-monitor-job.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/javadoc.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/ldap.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/pam-auth.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/ssh-slaves.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/subversion.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/translation.hpi
+
+%{_datadir}/%{name}/css
+%{_datadir}/%{name}/executable
+%{_datadir}/%{name}/help
+%{_datadir}/%{name}/images
+%{_datadir}/%{name}/scripts
+%{_datadir}/%{name}/*.txt
+%{_datadir}/%{name}/favicon.ico
+
+%files plugin-maven
+%defattr(644,root,root,755)
+%{_datadir}/%{name}/WEB-INF/plugins/maven-plugin.hpi
