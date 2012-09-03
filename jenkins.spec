@@ -6,13 +6,13 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
-Version:	1.477
+Version:	1.479
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war/%{version}/%{name}.war#/%{name}-%{version}.war
-# Source0-md5:	1b974ef14bad1fb22e2061fb2664750e
+# Source0-md5:	a17dafdab2a08c6933537624f582ffb4
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -50,6 +50,7 @@ Summary:	Jenkins Maven 2 Project Plugin
 Group:		Networking/Daemons/Java/Servlets
 URL:		https://wiki.jenkins-ci.org/display/JENKINS/Maven+2+Project+Plugin
 Requires:	%{name} = %{version}-%{release}
+Conflicts:	%{name} < %{version}-%{release}
 
 %description plugin-maven
 Maven Integration plugin.
