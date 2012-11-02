@@ -6,7 +6,7 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
-Version:	1.484
+Version:	1.488
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
