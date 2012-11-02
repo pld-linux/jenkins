@@ -12,7 +12,7 @@ License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war/%{version}/%{name}.war#/%{name}-%{version}.war
-# Source0-md5:	7ecf8e194bc96b10b5bb1cac58d48b22
+# Source0-md5:	2cfb4bb47f17d5b7d752d17fccffd4f7
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
