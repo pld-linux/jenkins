@@ -6,13 +6,13 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
-Version:	1.488
+Version:	1.489
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/?C=N;O=D
-Source0:	http://mirrors.jenkins-ci.org/war/%{version}/%{name}.war#/%{name}-%{version}.war
-# Source0-md5:	2cfb4bb47f17d5b7d752d17fccffd4f7
+Source0:	http://mirrors.jenkins-ci.org/war/%{version}/%{name}.war?/%{name}-%{version}.war
+# Source0-md5:	271e2611df336c59355a0637a3e38d6f
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
