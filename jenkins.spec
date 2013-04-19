@@ -6,13 +6,13 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
-Version:	1.501
+Version:	1.510
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	46d1024957c8918e9cec5d2dc4431d9a
+# Source0-md5:	d5fb16f82854dd55d4790d6b1ba9bbbe
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -117,12 +117,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_datadir}/%{name}/WEB-INF/plugins
 %{_datadir}/%{name}/WEB-INF/plugins/ant.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/credentials.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/cvs.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/external-monitor-job.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/javadoc.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/ldap.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/mailer.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/pam-auth.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/ssh-credentials.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/ssh-slaves.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/subversion.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/translation.hpi
