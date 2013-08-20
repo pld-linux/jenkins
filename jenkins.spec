@@ -3,6 +3,8 @@
 #   https://hudson.dev.java.net/files/documents/2402/125619/hudson-1.280-src.zip
 # - use system jars
 # - subpackages (see ubuntu packages for splitting contents)
+# - switch to LTS when next one (bigger version than current) comes out
+#   https://wiki.jenkins-ci.org/display/JENKINS/LTS+Release+Line
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
