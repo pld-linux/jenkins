@@ -3,18 +3,16 @@
 #   https://hudson.dev.java.net/files/documents/2402/125619/hudson-1.280-src.zip
 # - use system jars
 # - subpackages (see ubuntu packages for splitting contents)
-# - switch to LTS when next one (bigger version than current) comes out
-#   https://wiki.jenkins-ci.org/display/JENKINS/LTS+Release+Line
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
-Version:	1.520
+Version:	1.509.2
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
-# Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/?C=N;O=D
-Source0:	http://mirrors.jenkins-ci.org/war/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	c7edb8c15074e1278937fe44f2ea705b
+# Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
+Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
+# Source0-md5:	baee5248b6bbaf20beae944d8114ad7f
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -92,6 +90,15 @@ fi
 
 %postun
 %tomcat_clear_cache %{name}
+
+%triggerpostun -- %{name} < 1.509.1
+test -f /var/lib/jenkins/hudson.model.UpdateCenter.xml || return
+echo "Changing update center URL to LTS in /var/lib/jenkins/hudson.model.UpdateCenter.xml"
+echo "See https://wiki.jenkins-ci.org/display/JENKINS/LTS+Release+Line"
+sed -i.rpmorig -e 's,http://updates.jenkins-ci.org/update-center.json,http://updates.jenkins-ci.org/stable/update-center.json,' \
+	/var/lib/jenkins/hudson.model.UpdateCenter.xml
+echo "Clearing /var/lib/jenkins/updates"
+rm -rf /var/lib/jenkins/updates
 
 %clean
 rm -rf $RPM_BUILD_ROOT
