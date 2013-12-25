@@ -9,7 +9,7 @@
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 Version:	1.520
-Release:	1
+Release:	2
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war/?C=N;O=D
