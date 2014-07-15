@@ -6,13 +6,13 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
-Version:	1.532.2
+Version:	1.554.3
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	27a7ce3bfd3cfa1d13beb4265fd50919
+# Source0-md5:	f47c14c91d88ad2e25e8bdf1c1a73404
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -126,17 +126,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{_datadir}/%{name}/WEB-INF/plugins
 %{_datadir}/%{name}/WEB-INF/plugins/ant.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/antisamy-markup-formatter.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/credentials.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/cvs.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/external-monitor-job.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/javadoc.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/ldap.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/mailer.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/matrix-auth.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/pam-auth.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/ssh-credentials.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/ssh-slaves.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/subversion.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/translation.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/windows-slaves.hpi
 
 %{_datadir}/%{name}/css
 %{_datadir}/%{name}/executable
