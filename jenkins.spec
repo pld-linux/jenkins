@@ -6,13 +6,13 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
-Version:	1.554.3
+Version:	1.565.1
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	f47c14c91d88ad2e25e8bdf1c1a73404
+# Source0-md5:	5b6469cd824da50376e8b03c354a66c2
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -134,6 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/WEB-INF/plugins/ldap.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/mailer.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/matrix-auth.hpi
+%{_datadir}/%{name}/WEB-INF/plugins/matrix-project.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/pam-auth.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/ssh-credentials.hpi
 %{_datadir}/%{name}/WEB-INF/plugins/ssh-slaves.hpi
