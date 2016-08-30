@@ -6,14 +6,15 @@
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
-Version:	1.651.3
-Release:	1
+# Stay at LTS line
+Version:	2.7.2
+Release:	0.1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here:
 # Source0Download: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	6f7dad64bcbd443b026717f5c5600d1c
+# Source0-md5:	d90466355ef3b092b7140440042ce32f
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -67,39 +68,14 @@ find '(' -name '*~' -o -name '*.orig' ')' -print0 | xargs -0 -r -l512 rm -f
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/%{name},%{_datadir}/%{name},%{_sharedstatedir}/%{name},%{_tomcatconfdir}}
-mv WEB-INF/web.xml $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/web.xml
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/tomcat-context.xml
 ln -sf %{_sysconfdir}/%{name}/tomcat-context.xml $RPM_BUILD_ROOT%{_tomcatconfdir}/%{name}.xml
 cp -a . $RPM_BUILD_ROOT%{_datadir}/%{name}
+mv $RPM_BUILD_ROOT{%{_datadir}/%{name}/WEB-INF,%{_sysconfdir}/%{name}}/web.xml
 ln -sf %{_sysconfdir}/%{name}/web.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/WEB-INF/web.xml
-
-%post
-# If we have an old hudson install, rename it to jenkins
-if test -d /var/lib/hudson; then
-	echo >&2 "Moving /var/lib/hudson -> /var/lib/jenkins"
-	# leave a marker to indicate this came from Hudson.
-	# could be useful down the road
-	# This also ensures that the .??* wildcard matches something
-	touch /var/lib/hudson/.moving-hudson
-	mv -f /var/lib/hudson/* /var/lib/hudson/.??* /var/lib/jenkins
-	rmdir /var/lib/hudson
-fi
-if test -d /var/run/hudson; then
-	mv -f /var/run/hudson/* /var/run/jenkins
-	rmdir /var/run/hudson
-fi
 
 %postun
 %tomcat_clear_cache %{name}
-
-%triggerpostun -- %{name} < 1.509.1
-test -f /var/lib/jenkins/hudson.model.UpdateCenter.xml || return
-echo "Changing update center URL to LTS in /var/lib/jenkins/hudson.model.UpdateCenter.xml"
-echo "See https://wiki.jenkins-ci.org/display/JENKINS/LTS+Release+Line"
-sed -i.rpmorig -e 's,http://updates.jenkins-ci.org/update-center.json,http://updates.jenkins-ci.org/stable/update-center.json,' \
-	/var/lib/jenkins/hudson.model.UpdateCenter.xml
-echo "Clearing /var/lib/jenkins/updates"
-rm -rf /var/lib/jenkins/updates
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -125,34 +101,35 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/WEB-INF/remoting.jar
 %{_datadir}/%{name}/WEB-INF/slave.jar
 
-%dir %{_datadir}/%{name}/WEB-INF/plugins
-%{_datadir}/%{name}/WEB-INF/plugins/ant.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/antisamy-markup-formatter.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/credentials.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/cvs.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/external-monitor-job.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/javadoc.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/junit.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/ldap.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/mailer.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/matrix-auth.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/matrix-project.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/pam-auth.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/script-security.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/ssh-credentials.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/ssh-slaves.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/subversion.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/translation.hpi
-%{_datadir}/%{name}/WEB-INF/plugins/windows-slaves.hpi
+%dir %{_datadir}/%{name}/WEB-INF/detached-plugins
+%{_datadir}/%{name}/WEB-INF/detached-plugins/ant.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/antisamy-markup-formatter.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/credentials.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/cvs.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/external-monitor-job.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/javadoc.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/junit.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/ldap.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/mailer.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/matrix-auth.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/matrix-project.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/pam-auth.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/script-security.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/ssh-credentials.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/ssh-slaves.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/subversion.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/translation.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/windows-slaves.hpi
 
 %{_datadir}/%{name}/css
 %{_datadir}/%{name}/executable
 %{_datadir}/%{name}/help
 %{_datadir}/%{name}/images
+%{_datadir}/%{name}/jsbundles
 %{_datadir}/%{name}/scripts
 %{_datadir}/%{name}/*.txt
 %{_datadir}/%{name}/favicon.ico
 
 %files plugin-maven
 %defattr(644,root,root,755)
-%{_datadir}/%{name}/WEB-INF/plugins/maven-plugin.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/maven-plugin.hpi
