@@ -8,7 +8,7 @@ Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 # Stay at LTS line
 Version:	2.7.2
-Release:	0.1
+Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here:
