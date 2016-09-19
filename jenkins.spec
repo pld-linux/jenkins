@@ -24,7 +24,6 @@ BuildRequires:	rpmbuild(macros) >= 1.546
 Requires:	jpackage-utils
 Requires:	jre-X11 >= 1.7
 Requires:	tomcat
-Suggests:	%{name}-plugin-maven
 Obsoletes:	hudson < 1.396
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
