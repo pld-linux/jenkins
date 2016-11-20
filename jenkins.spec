@@ -7,14 +7,14 @@
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 # Stay at LTS line
-Version:	2.7.4
+Version:	2.19.3
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here:
 # Source0Download: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	1adb10f8286c2c51b89142e0b9081856
+# Source0-md5:	cbc6603a32abcb9cdca0283795bea2bc
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -103,6 +103,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_datadir}/%{name}/WEB-INF/detached-plugins
 %{_datadir}/%{name}/WEB-INF/detached-plugins/ant.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/antisamy-markup-formatter.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/bouncycastle-api.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/credentials.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/cvs.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/external-monitor-job.hpi
