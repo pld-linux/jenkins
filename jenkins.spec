@@ -3,18 +3,20 @@
 #   https://hudson.dev.java.net/files/documents/2402/125619/hudson-1.280-src.zip
 # - use system jars
 # - subpackages (see ubuntu packages for splitting contents)
+# NOTES:
+# - Release notes: https://jenkins.io/changelog-stable/
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 # Stay at LTS line
-Version:	2.19.3
+Version:	2.19.4
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here:
 # Source0Download: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	cbc6603a32abcb9cdca0283795bea2bc
+# Source0-md5:	0b373135cf9f915c383fd7a835b61763
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
