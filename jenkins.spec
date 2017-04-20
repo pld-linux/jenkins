@@ -5,18 +5,19 @@
 # - subpackages (see ubuntu packages for splitting contents)
 # NOTES:
 # - Release notes: https://jenkins.io/changelog-stable/
+# - LTS Upgrade Guide: https://jenkins.io/doc/upgrade-guide/
 %include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 # Stay at LTS line
-Version:	2.19.4
+Version:	2.46.1
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here:
 # Source0Download: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	0b373135cf9f915c383fd7a835b61763
+# Source0-md5:	e343b1d9f9206e236d6381a38cf4dc75
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -99,8 +100,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/WEB-INF/*.xmi
 %{_datadir}/%{name}/WEB-INF/*.xml
 %{_datadir}/%{name}/WEB-INF/jenkins-cli.jar
-%{_datadir}/%{name}/WEB-INF/remoting.jar
-%{_datadir}/%{name}/WEB-INF/slave.jar
 
 %dir %{_datadir}/%{name}/WEB-INF/detached-plugins
 %{_datadir}/%{name}/WEB-INF/detached-plugins/ant.hpi
