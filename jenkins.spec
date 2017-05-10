@@ -10,14 +10,14 @@
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 # Stay at LTS line
-Version:	2.46.1
+Version:	2.46.2
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here:
 # Source0Download: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	e343b1d9f9206e236d6381a38cf4dc75
+# Source0-md5:	6be11c38a6fd9f88fd766538bc7c4fc7
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
