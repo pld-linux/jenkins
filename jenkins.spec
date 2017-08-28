@@ -10,14 +10,14 @@
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 # Stay at LTS line
-Version:	2.46.2
+Version:	2.60.3
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here:
 # Source0Download: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	6be11c38a6fd9f88fd766538bc7c4fc7
+# Source0-md5:	7718ebbf1d8e98f629a3d0f13287c5ca
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -25,7 +25,7 @@ BuildRequires:	jpackage-utils
 BuildRequires:	rpm-javaprov
 BuildRequires:	rpmbuild(macros) >= 1.546
 Requires:	jpackage-utils
-Requires:	jre-X11 >= 1.7
+Requires:	jre-X11 >= 1.8
 Requires:	tomcat
 Obsoletes:	hudson < 1.396
 BuildArch:	noarch
