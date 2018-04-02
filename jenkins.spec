@@ -10,14 +10,14 @@
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 # Stay at LTS line
-Version:	2.60.3
+Version:	2.107.1
 Release:	1
 License:	MIT License
 Group:		Networking/Daemons/Java/Servlets
 # Check for new releases and URLs here:
 # Source0Download: http://mirrors.jenkins-ci.org/war-stable/?C=N;O=D
 Source0:	http://mirrors.jenkins-ci.org/war-stable/%{version}/%{name}.war?/%{name}-%{version}.war
-# Source0-md5:	7718ebbf1d8e98f629a3d0f13287c5ca
+# Source0-md5:	5696c51a98716bf756e9c088330b151a
 Source1:	context.xml
 Patch0:		webxml.patch
 URL:		http://www.jenkins-ci.org/
@@ -105,8 +105,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/WEB-INF/detached-plugins/ant.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/antisamy-markup-formatter.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/bouncycastle-api.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/command-launcher.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/credentials.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/cvs.hpi
+%{_datadir}/%{name}/WEB-INF/detached-plugins/display-url-api.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/external-monitor-job.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/javadoc.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/junit.hpi
@@ -122,6 +124,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/WEB-INF/detached-plugins/translation.hpi
 %{_datadir}/%{name}/WEB-INF/detached-plugins/windows-slaves.hpi
 
+%{_datadir}/%{name}/bootstrap
 %{_datadir}/%{name}/css
 %{_datadir}/%{name}/executable
 %{_datadir}/%{name}/help
