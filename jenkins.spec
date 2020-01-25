@@ -6,7 +6,6 @@
 # NOTES:
 # - Release notes: https://jenkins.io/changelog-stable/
 # - LTS Upgrade Guide: https://jenkins.io/doc/upgrade-guide/
-%include	/usr/lib/rpm/macros.java
 Summary:	Jenkins Continuous Build Server
 Name:		jenkins
 # Stay at LTS line
